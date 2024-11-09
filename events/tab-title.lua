@@ -63,7 +63,15 @@ local function create_title(process_name, base_title, max_width, inset)
    local title
 
    if process_name:len() > 0 then
-      title = process_name .. ' ~ ' .. base_title
+      if process_name == "nvim" then
+         title = ' ' .. process_name
+      elseif process_name == "yazi" then
+         title = '󰇥 ' .. process_name
+      elseif process_name == 'zsh' or process_name == 'bash' then
+         title = ' ' .. process_name
+      else
+         title = process_name 
+      end
    else
       title = base_title
    end
@@ -197,7 +205,7 @@ M.setup = function()
       window:perform_action(
          wezterm.action.PromptInputLine({
             description = wezterm.format({
-               { Foreground = { Color = '#FFFFFF' } },
+               { Foreground = { Color = fg } },
                { Attribute = { Intensity = 'Bold' } },
                { Text = 'Enter new name for tab' },
             }),
