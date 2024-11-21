@@ -48,6 +48,21 @@ local colors = {
    scircle_hover         = { bg = 'rgba(0, 0, 0, 0.4)', fg = '#587D8C' },
    scircle_active        = { bg = 'rgba(0, 0, 0, 0.4)', fg = '#7FB4CA' },
 }
+local rust_programs = {
+   'btm',
+   'cargo',
+   'procs',
+   'hexyl',
+   'bat'
+}
+local function check_is_rust_program(proc)
+    for _, program in ipairs(rust_programs) do
+        if proc == program then
+            return true
+        end
+    end
+    return false
+end
 
 ---@param proc string
 local function clean_process_name(proc)
@@ -64,13 +79,23 @@ local function create_title(process_name, base_title, max_width, inset)
 
    if process_name:len() > 0 then
       if process_name == "nvim" then
-         title = ' ' .. process_name
+         title = ' neovim'
       elseif process_name == "yazi" then
-         title = '󰇥 ' .. process_name
+         title = '󰇥 yazi'
+      elseif process_name == 'fish' then
+         title = '  fish'
       elseif process_name == 'zsh' or process_name == 'bash' then
          title = ' ' .. process_name
+      elseif string.sub(process_name, 0, 4) == 'node' then
+         title = ' node'
+      elseif string.sub(process_name, 0, 3) == 'git' then
+         title = '󰊢 ' .. process_name
+      elseif string.sub(process_name, 0, 6) == 'python' then
+         title = ' python'
+      elseif check_is_rust_program(process_name) then
+         title = ' ' .. process_name
       else
-         title = process_name 
+         title = process_name
       end
    else
       title = base_title

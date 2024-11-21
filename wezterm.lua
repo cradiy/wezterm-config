@@ -1,5 +1,4 @@
 local Config = require('config')
-
 require('utils.backdrops')
    :set_files()
    -- :set_focus('#000000')
