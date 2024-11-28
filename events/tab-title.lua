@@ -95,7 +95,7 @@ local function create_title(process_name, base_title, max_width, inset)
       elseif check_is_rust_program(process_name) then
          title = ' ' .. process_name
       else
-         title = process_name
+         title = ' ' .. process_name
       end
    else
       title = base_title
