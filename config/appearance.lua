@@ -2,8 +2,6 @@ local gpu_adapters = require('utils.gpu_adapter')
 local backdrops = require('utils.backdrops')
 local colors = require('colors.custom')
 
-
-
 return {
     -- initial_rows = 50,
     -- initial_cols = 160,
@@ -23,11 +21,11 @@ return {
     background = backdrops:create_opts(),
 
     -- scrollbar
-    enable_scroll_bar = true,
+    enable_scroll_bar = false,
 
     -- tab bar
     enable_tab_bar = true,
-    hide_tab_bar_if_only_one_tab = false,
+    hide_tab_bar_if_only_one_tab = true,
     use_fancy_tab_bar = false,
     tab_max_width = 25,
     font_size = 13.0,
@@ -40,12 +38,12 @@ return {
         left = 0,
         right = 0,
         top = 5,
-        bottom = 7.5
+        bottom = 7.5,
     },
     adjust_window_size_when_changing_font_size = false,
     window_close_confirmation = 'NeverPrompt',
     window_frame = {
-        active_titlebar_bg = '#090909'
+        active_titlebar_bg = '#090909',
         -- font = fonts.font,
         -- font_size = fonts.font_size,
     },
@@ -55,7 +53,7 @@ return {
     -- },
     inactive_pane_hsb = {
         saturation = 1,
-        brightness = 1
+        brightness = 1,
     },
-    window_decorations = "NONE"
+    window_decorations = 'NONE',
 }

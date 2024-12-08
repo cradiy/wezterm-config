@@ -6,20 +6,20 @@ local act = wezterm.action
 local mod = {}
 
 if platform.is_mac then
-   mod.SUPER = 'SUPER'
-   mod.SUPER_REV = 'SUPER|CTRL'
+    mod.SUPER = 'SUPER'
+    mod.SUPER_REV = 'SUPER|CTRL'
 elseif platform.is_win or platform.is_linux then
-   mod.SUPER = 'ALT' -- to not conflict with Windows key shortcuts
-   mod.SUPER_REV = 'ALT|CTRL'
+    mod.SUPER = 'ALT' -- to not conflict with Windows key shortcuts
+    mod.SUPER_REV = 'ALT|CTRL'
 end
 
 -- stylua: ignore
 local keys = {
    -- misc/useful --
    { key = 'F1', mods = 'NONE', action = 'ActivateCopyMode' },
-   -- { key = 'F2', mods = 'NONE', action = act.ActivateCommandPalette },
-   --{ key = 'F3', mods = 'NONE', action = act.ShowLauncher },
-   -- { key = 'F4', mods = 'NONE', action = act.ShowLauncherArgs({ flags = 'FUZZY|TABS' }) },
+   { key = 'F2', mods = 'NONE', action = act.ActivateCommandPalette },
+   { key = 'F3', mods = 'NONE', action = act.ShowLauncher },
+   { key = 'F4', mods = 'NONE', action = act.ShowLauncherArgs({ flags = 'FUZZY|TABS' }) },
    {
       key = 'F5',
       mods = 'NONE',
@@ -27,7 +27,7 @@ local keys = {
    },
    { key = 'F11', mods = 'NONE',    action = act.ToggleFullScreen },
   --  { key = 'F12', mods = 'NONE',    action = act.ShowDebugOverlay },
-   { key = 'f',   mods = mod.SUPER, action = act.Search({ CaseInSensitiveString = '' }) },
+   -- { key = 'f',   mods = mod.SUPER, action = act.Search({ CaseInSensitiveString = '' }) },
    {
       key = 'u',
       mods = mod.SUPER_REV,
@@ -49,8 +49,8 @@ local keys = {
    },
 
    -- cursor movement --
-   { key = 'LeftArrow',  mods = mod.SUPER,     action = act.SendString '\x1bOH' },
-   { key = 'RightArrow', mods = mod.SUPER,     action = act.SendString '\x1bOF' },
+   -- { key = 'LeftArrow',  mods = mod.SUPER,     action = act.SendString '\x1bOH' },
+   -- { key = 'RightArrow', mods = mod.SUPER,     action = act.SendString '\x1bOF' },
    { key = 'Backspace',  mods = mod.SUPER,     action = act.SendString '\x15' },
 
    -- copy/paste --
@@ -207,6 +207,8 @@ local keys = {
          timemout_miliseconds = 1000,
       }),
    },
+  {key="UpArrow", mods="CTRL", action=wezterm.action{ScrollByLine=-5}}, -- 每次向上滚动5行
+  {key="DownArrow", mods="CTRL", action=wezterm.action{ScrollByLine=5}}, -- 每次向下滚动5行
 }
 
 -- stylua: ignore
@@ -229,19 +231,19 @@ local key_tables = {
 }
 
 local mouse_bindings = {
-   -- Ctrl-click will open the link under the mouse cursor
-   {
-      event = { Up = { streak = 1, button = 'Left' } },
-      mods = 'CTRL',
-      action = act.OpenLinkAtMouseCursor,
-   },
+    -- Ctrl-click will open the link under the mouse cursor
+    {
+        event = { Up = { streak = 1, button = 'Left' } },
+        mods = 'CTRL',
+        action = act.OpenLinkAtMouseCursor,
+    },
 }
 
 return {
-   disable_default_key_bindings = true,
-   -- disable_default_mouse_bindings = true,
-   leader = { key = 'Space', mods = mod.SUPER_REV },
-   keys = keys,
-   key_tables = key_tables,
-   mouse_bindings = mouse_bindings,
+    disable_default_key_bindings = true,
+    -- disable_default_mouse_bindings = true,
+    leader = { key = 'Space', mods = mod.SUPER_REV },
+    keys = keys,
+    key_tables = key_tables,
+    mouse_bindings = mouse_bindings,
 }
